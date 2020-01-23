@@ -1,42 +1,59 @@
-package com.wirtz.vanesa.login.entidades;
+package com.wirtz.vanesa.persistencia.entidades;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import ch.qos.logback.core.subst.Token.Type;
+
+import javax.persistence.JoinColumn;
 
 /*Clase que representa la tabla de nuestros usuarios en la BD 
  * con sus roles correspondientes*/
 
 @Entity
-public class EntidadUsuario {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private String nombreUsuario;
+	private String username;
 	
 	private String contrasenha;
 	
 	private boolean activo;
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="roles_usuarios",
+	joinColumns=@JoinColumn(name="id_usuario"),
+	inverseJoinColumns=@JoinColumn(name="id_rol"))
 	private Set<Rol> roles;
 
 	
-	public EntidadUsuario() {
+	public Usuario() {
 		super();
+		roles = new HashSet<Rol>();
 	}
 
-	public EntidadUsuario(Long id, String nombreUsuario, String contrasenha, boolean activo, Set<Rol> roles) {
+	public Usuario(Long id, String nombreUsuario, String contrasenha, boolean activo) {
 		super();
 		this.id = id;
-		this.nombreUsuario = nombreUsuario;
+		this.username = nombreUsuario;
 		this.contrasenha = contrasenha;
 		this.activo = activo;
-		this.roles = roles;
+		roles = new HashSet<Rol>();
 	}
 
 	public Long getId() {
@@ -48,11 +65,11 @@ public class EntidadUsuario {
 	}
 
 	public String getNombreUsuario() {
-		return nombreUsuario;
+		return username;
 	}
 
 	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+		this.username = nombreUsuario;
 	}
 
 	public String getContrasenha() {

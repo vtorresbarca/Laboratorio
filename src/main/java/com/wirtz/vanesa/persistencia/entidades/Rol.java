@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.login.entidades;
+package com.wirtz.vanesa.persistencia.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ public class Rol {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	private String rol;
+	private String name;
 
 	
 	public Rol() {
@@ -29,11 +29,11 @@ public class Rol {
 		this.id = id;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getName() {
+		return name;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setName(String rol) {
+		this.name = rol;
 	}
 }
