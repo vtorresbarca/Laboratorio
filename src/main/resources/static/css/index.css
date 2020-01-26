@@ -1,65 +1,72 @@
-body{
-    background: url(../img/background.jpg) no-repeat center center fixed;
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+
+body {
+    background-image: url("../img/microscopio.jpg");
     background-size: cover;
+    width: 100vw;
+    height: 100vh;
 }
 
-.main-section{
-    margin:0 auto;
-    margin-top:25%;
-    padding: 0;
+#titulo {
+    color: rgb(206, 167, 94);
+    letter-spacing: .40em;
+    font-size: 60px;
+    font-weight: 35px;
+    text-align: center;
+    margin-top: 28vh;
+    text-shadow: 0 0 20px rgba(228, 194, 132, 0.774);
+    font-family: 'Courgette', cursive;
 }
 
-.modal-content{
-    background-color: #3b4652;
-    opacity: .85;
-    padding: 0 20px;
-    box-shadow: 0px 0px 3px #848484;
-}
-.user-img{
-    margin-top: -50px;
-    margin-bottom: 35px;
-}
-
-.user-img img{
-    width: 100xp;
-    height: 100px;
-    box-shadow: 0px 0px 3px #848484;
-    border-radius: 50%;
+#servicios {
+    font-size: medium;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 12vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(245, 245, 245, 0.74);
+    height: 25vh;
 }
 
-.form-group input{
-    height: 42px;
-    font-size: 18px;
-    border:0;
-    padding-left: 54px;
-    border-radius: 5px;
+.servicio p {
+    margin-top: 30px;
 }
 
-.form-group::before{
-    font-family: "Font Awesome\ 5 Free";
-    position: absolute;
-    left: 28px;
-    font-size: 22px;
-    padding-top:4px;
+#micro, #user, #huella, #manzana, #dna{
+    font-size: 60px;
+    margin: 2vh;
+    margin-top: 55px;
 }
 
-.form-group#user-group::before{
-    content: "\f007";
+.logo {
+    font-size: 30px;
 }
 
-.form-group#contrasena-group::before{
-    content: "\f023";
+#registrarse, #iniciarSesion{
+    font-size: 25px;
+    letter-spacing: .5em;
 }
 
-button{
-    width: 60%;
-    margin: 5px 0 25px;
+.boton{
+    position: relative;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    text-decoration: none;
+    color:black;
+    border-radius: 7px;
 }
 
-.forgot{
-    padding: 5px 0;
+.boton:hover{
+    background-color: white;
+    color: orange;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+
 }
 
-.forgot a{
-    color: white;
-}
+
+
+
