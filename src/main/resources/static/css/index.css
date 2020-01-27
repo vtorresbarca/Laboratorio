@@ -1,11 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
 
+html {
+	height: 100%;
+}
+
 body {
     background-image: url("../img/microscopio.jpg");
     background-size: cover;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
+}
+
+#pagina {
+	min-height: 100%;
+	position: relative;
+}
+
+main {
+	padding-bottom: 50px; /*Valor igual o mayor que el alto del footer*/
 }
 
 #titulo {
@@ -59,14 +72,26 @@ body {
     border-radius: 7px;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: white;
     color: orange;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
-
 }
 
+footer div {
+	background-color: #343A40;
+	height: 40px;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+    left: 0;
+    text-align: center;
+}
 
-
-
+.fa-instagram, .fa-linkedin, .fa-twitter-square {
+    color: white;
+    font-size: 25px;
+    letter-spacing: .40em;
+    margin-top: 5px;
+}
