@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.wirtz.vanesa.negocio.servicios.UserDetailsServiceImpl;
 
@@ -34,14 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin().
 					loginPage("/login")
 					.permitAll()
-					.defaultSuccessUrl("/menu")
+					.defaultSuccessUrl("/")
 					.failureUrl("/login?error=true")
 					.usernameParameter("nombreUsuario")
 					.passwordParameter("contrasenha")
 					.and()
 				.logout()
-					.permitAll()
-					.logoutSuccessUrl("/login?logout");
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/")
+					.and()
+					.exceptionHandling();
  
     }
     
