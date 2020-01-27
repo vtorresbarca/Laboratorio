@@ -21,7 +21,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 </head>
 <body>
 	<div id="pagina">
-		<header>
+		<header th:fragment="header">
 			<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 				<a class="navbar-brand" href="#"><i class="logo fas fa-flask"></i></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -45,13 +45,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 						<li class="nav-item"><a class="nav-link"
 							th:href="@{/crearUsuario}"><i class="fas fa-user"
 								id="registrarse"></i>Registrarse</a></li>
-						<!-- <li class="nav-item">
-							<a class="nav-link" th:href="@{/login}">
-									<i class="fas fa-sign-in-alt" id="iniciarSesion"></i>
-									<span sec:authorize="!isAuthenticated()">Iniciar sesión</span>
-									<span sec:authorize="isAuthenticated()">Cerrar sesión</span>
-							</a>
-						</li> -->
+						
 						<li class="nav-item"><a class="nav-link" href="/login"
 							sec:authorize="!isAuthenticated()"> <i
 								class="fas fa-sign-in-alt"></i>
@@ -73,7 +67,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<main>
 			<div>
 				<div id="servicios">
-					<a class="boton" href="@{#}">
+					<a class="boton" href="#">
 						<div>
 							<i class="fas fa-microscope" id="micro"></i>
 							<p>Anatomía patológica</p>
@@ -104,7 +98,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			</div>
 		</main>
 	</div>
-	<footer>
+	<footer th:fragment="footer">
 		<div>
 			<a href=""> <i class="fab fa-instagram"></i>
 			</a> <a href=""> <i class="fab fa-linkedin"></i>
