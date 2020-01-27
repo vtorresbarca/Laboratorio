@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    /*Creamos un objeto UserDetails para retornarlo
 	    (es el que necesita Spring Security para trabajar)*/
 	    UserDetails usuarioFinal = (UserDetails) new User(
-	    							usuarioBuscado.getNombreUsuario(),
+	    							usuarioBuscado.getUsername(),
 	    							usuarioBuscado.getContrasenha(),
 	    							listaRoles);
 	   

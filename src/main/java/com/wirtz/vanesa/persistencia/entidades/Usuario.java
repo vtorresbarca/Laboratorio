@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -32,6 +33,15 @@ public class Usuario {
 	private String username;
 	
 	private String contrasenha;
+	
+	private String nombre;
+	
+	private String apellido1;
+	
+	private String apellido2;
+	
+	@ManyToOne
+	private Responsable responsableAsociado;
 	
 	private boolean activo;
 	
@@ -64,14 +74,6 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNombreUsuario() {
-		return username;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.username = nombreUsuario;
-	}
-
 	public String getContrasenha() {
 		return contrasenha;
 	}
@@ -95,4 +97,38 @@ public class Usuario {
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido1() {
+		return apellido1;
+	}
+
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1;
+	}
+
+	public String getApellido2() {
+		return apellido2;
+	}
+
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2;
+	}
+	
+	
 }

@@ -25,18 +25,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public void crearUsuario(UserForm usuarioForm) throws ContrasenhasNoCoincidentes{
-//		Usuario miUsuario = new Usuario();
-//		miUsuario.setNombreUsuario(username);
-//		miUsuario.setContrasenha(encoder.encode(password));
-//		
-//		//asigno un rol
-//		Rol nuevoRol = new Rol();
-//		nuevoRol.setName("user");
-//		rolRepo.save(nuevoRol);	
-//		//añado el rol a la lista del usuario
-//		miUsuario.getRoles().add(nuevoRol);
-//		//guardo el usuario
-//		usuarioRepo.save(miUsuario);
+
 		if(usuarioForm.getContrasenha().contentEquals(usuarioForm.getContrasenha2())) {
 			Usuario userEntity = convertirFormToEntity(usuarioForm);
 			Rol nuevoRol = new Rol();
@@ -70,7 +59,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Usuario convertirFormToEntity(UserForm user) {
 		Usuario miUsuario = new Usuario();
-		miUsuario.setNombreUsuario(user.getNombreUsuario());
+		miUsuario.setUsername(user.getNombreUsuario());
 		miUsuario.setContrasenha(encoder.encode(user.getContrasenha()));
 		
 		return miUsuario;
