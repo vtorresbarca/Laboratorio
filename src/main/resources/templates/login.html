@@ -21,9 +21,9 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
 <!-- Nuestro css-->
-<link rel="stylesheet" type="text/css" href="static/css/index.css"
+<link rel="stylesheet" type="text/css" 
 	th:href="@{/css/index.css}">
-<link rel="stylesheet" type="text/css" href="static/css/login.css"
+<link rel="stylesheet" type="text/css" 
 	th:href="@{/css/login.css}">
 <!-- pagina de guia: https://www.youtube.com/watch?v=ooc6f1w6Mzg -->
 </head>
@@ -32,7 +32,7 @@
 	
 	<form th:action="@{/login}" method="post">
 		<div class="caja-exterior">
-			<h1>Formulario de registro</h1>
+			<h1>Iniciar sesión</h1>
 			<div id="caja-intermedia">
 				<div class="caja-texto">
 					<input type="text" placeholder="Nombre de usuario" name="username"
@@ -46,7 +46,7 @@
 			</div>
 			<button class="boton" type="submit" name="enviar">Iniciar
 				sesión</button>
-
+	
 		</div>
 	</form>
 	<div th:if="${param.error}" class="alert alert-danger" role="alert">

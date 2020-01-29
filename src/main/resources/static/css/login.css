@@ -23,6 +23,7 @@ body {
 	font-size: 30px;
 	border-bottom: 2px solid orange;
 	padding: 5px;
+	letter-spacing: .20em;
 }
 
 .caja-texto {
@@ -52,7 +53,7 @@ body {
 }
 
 .boton {
-	margin-top: 15px;
+	margin-top: 20px;
 	padding: 3px;
 	background: none;
 	color: white;
