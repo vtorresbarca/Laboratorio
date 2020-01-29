@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
 <link rel="stylesheet"
@@ -15,21 +15,45 @@
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 </head>
 <body>
-	<form class="col-12" th:action="@{/crearUsuario}" th:object="${nuevoUsuario}" method="post">
+	<form class="col-12" th:action="@{/createUser}" th:object="${newUser}" method="post">
 		<div class="form-group" id="user-group">
 			<input type="text" class="form-control"
-				placeholder="Nombre de usuario" th:field="*{nombreUsuario}"/>
-			<span class="form-text text-danger" th:if="${#fields.hasErrors('nombreUsuario')}" th:errors="*{nombreUsuario}"></span>
+				placeholder="Nombre de usuario" th:field="*{username}"/>
+			<span class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
 		</div>
+		
 		<div class="form-group" id="contrasena-group">
 			<input type="password" class="form-control" 
-				placeholder="Contrasena" th:field="*{contrasenha}" />
+				placeholder="Contrasena" th:field="*{password}" />
 		</div>
+		
 		<div class="form-group" id="contrasena-group">
 			<input type="password" class="form-control" 
-				placeholder="Confirme contrasenha" th:field="*{contrasenha2}" />
-			<span class="form-text text-danger" th:if="${#fields.hasErrors('contrasenha')}"
-			th:unless="${fields.hasErrors('contrasenha2')}" th:errors="*{contrasenhasDiferentes}"></span>
+				placeholder="Confirme contrasenha" th:field="*{password2}" />
+		</div>
+		
+		<div class="form-group" id="user-group">
+			<input type="text" class="form-control"
+				placeholder="Nombre" th:field="*{name}"/>
+			<span class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+		</div>
+		
+		<div class="form-group" id="ap1-user-group">
+			<input type="text" class="form-control"
+				placeholder="Primer apellido" th:field="*{firstName}"/>
+			<span class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+		</div>
+		
+		<div class="form-group" id="ap2-user-group">
+			<input type="text" class="form-control"
+				placeholder="Segundo apellido" th:field="*{secondName}"/>
+			<span class="form-text text-danger" th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}"></span>
+		</div>
+		
+		<div class="form-group" id="email-group">
+			<input type="text" class="form-control"
+				placeholder="Correo electrónico" th:field="*{email}"/>
+			<span class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 		</div>
 		
 		<button type="submit" class="btn btn-primary">

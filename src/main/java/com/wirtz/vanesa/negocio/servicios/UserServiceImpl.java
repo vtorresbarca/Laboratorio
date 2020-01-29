@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.wirtz.vanesa.excepciones.ContrasenhasNoCoincidentes;
+import com.wirtz.vanesa.excepciones.DifferentPasswords;
 import com.wirtz.vanesa.persistencia.entidades.Rol;
 import com.wirtz.vanesa.persistencia.entidades.Usuario;
 import com.wirtz.vanesa.persistencia.repositorio.RoleRepository;
@@ -24,17 +24,17 @@ public class UserServiceImpl implements UserService{
 	private UserRepository usuarioRepo;
 	
 	@Override
-	public void crearUsuario(UserForm usuarioForm) throws ContrasenhasNoCoincidentes{
+	public void createUser(UserForm usuarioForm) throws DifferentPasswords{
 
-		if(usuarioForm.getContrasenha().contentEquals(usuarioForm.getContrasenha2())) {
+		if(usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
 			Usuario userEntity = convertirFormToEntity(usuarioForm);
-			Rol nuevoRol = new Rol();
-			nuevoRol.setName("user");
-			rolRepo.save(nuevoRol);
-			userEntity.getRoles().add(nuevoRol);
+			Rol newRol = new Rol();
+			newRol.setName("user");
+			rolRepo.save(newRol);
+			userEntity.getRoles().add(newRol);
 			usuarioRepo.save(userEntity);
 		}else {
-			throw new ContrasenhasNoCoincidentes("Las contraseñas no coinciden, vuelva a intentarlo");
+			throw new DifferentPasswords("Las contraseñas no coinciden, vuelva a intentarlo");
 		}
 	}
 
@@ -59,8 +59,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Usuario convertirFormToEntity(UserForm user) {
 		Usuario miUsuario = new Usuario();
-		miUsuario.setUsername(user.getNombreUsuario());
-		miUsuario.setContrasenha(encoder.encode(user.getContrasenha()));
+		miUsuario.setUsername(user.getUsername());
+		miUsuario.setPassword(encoder.encode(user.getPassword()));
+		miUsuario.setName(user.getName());
+		miUsuario.setFirstName(user.getFirstName());
+		miUsuario.setSecondName(user.getSecondName());
+		miUsuario.setEmail(user.getEmail());
 		
 		return miUsuario;
 	}

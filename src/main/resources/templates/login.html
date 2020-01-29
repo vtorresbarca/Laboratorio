@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta charset="UTF-8">
 <title>Mi primer Login</title>
 
 <!--JQUERY-->
@@ -22,38 +23,37 @@
 <!-- Nuestro css-->
 <link rel="stylesheet" type="text/css" href="static/css/index.css"
 	th:href="@{/css/index.css}">
+<link rel="stylesheet" type="text/css" href="static/css/login.css"
+	th:href="@{/css/login.css}">
 <!-- pagina de guia: https://www.youtube.com/watch?v=ooc6f1w6Mzg -->
 </head>
 <body>
 	<header th:replace="index::header"></header>
-	<div class="modal-dialog text-center">
-        <div class="col-sm-8 main-section">
-            <div class="modal-content">
-                <div class="col-12 user-img">
-                    <img src="static/img/user.png" th:src="@{/img/user.png}"/>
-                </div>
-                <form class="col-12" th:action="@{/login}" method="post">
-                    <div class="form-group" id="user-group">
-                        <input type="text" class="form-control" placeholder="Nombre de usuario" name="nombreUsuario"/>
-                    </div>
-                    <div class="form-group" id="contrasena-group">
-                        <input type="password" class="form-control" placeholder="Contrasena" name="contrasenha"/>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
-                </form>
-                <div class="col-12 forgot">
-                    <a href="#">Recordar contrasena?</a>
-                </div>
-                <a th:href="@{/crearUsuario}"><button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Crear Usuario </button></a>
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-		            Invalid username and password.
-		        </div>
-		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-		            You have been logged out.
-		        </div>
-            </div>
-        </div>
-    </div>
-    <footer th:replace="index::footer"></footer>
+	
+	<form th:action="@{/login}" method="post">
+		<div class="caja-exterior">
+			<h1>Formulario de registro</h1>
+			<div id="caja-intermedia">
+				<div class="caja-texto">
+					<input type="text" placeholder="Nombre de usuario" name="username"
+						value="">
+				</div>
+
+				<div class="caja-texto">
+					<input type="password" placeholder="Contraseña" name="password"
+						value="">
+				</div>
+			</div>
+			<button class="boton" type="submit" name="enviar">Iniciar
+				sesión</button>
+
+		</div>
+	</form>
+	<div th:if="${param.error}" class="alert alert-danger" role="alert">
+		Nombre de usuario o contraseña no son válidos</div>
+	<div th:if="${param.logout}" class="alert alert-success" role="alert">
+		Has cerrado la sesión</div>
+		
+	<footer th:replace="index::footer"></footer>
 </body>
 </html>

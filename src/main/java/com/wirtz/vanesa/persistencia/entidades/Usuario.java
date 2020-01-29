@@ -4,21 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import ch.qos.logback.core.subst.Token.Type;
-
-import javax.persistence.JoinColumn;
 
 /*Clase que representa la tabla de nuestros usuarios en la BD 
  * con sus roles correspondientes*/
@@ -32,16 +24,15 @@ public class Usuario {
 	
 	private String username;
 	
-	private String contrasenha;
+	private String password;
 	
-	private String nombre;
+	private String name;
 	
-	private String apellido1;
+	private String firstName;
 	
-	private String apellido2;
+	private String secondName;
 	
-	@ManyToOne
-	private Responsable responsableAsociado;
+	private String email;
 	
 	private boolean activo;
 	
@@ -49,21 +40,25 @@ public class Usuario {
 	@JoinTable(name="roles_usuarios",
 	joinColumns=@JoinColumn(name="id_usuario"),
 	inverseJoinColumns=@JoinColumn(name="id_rol"))
-	private Set<Rol> roles;
+	private Set<Rol> roles = new HashSet<Rol>();
 
 	
 	public Usuario() {
 		super();
-		roles = new HashSet<Rol>();
 	}
 
-	public Usuario(Long id, String nombreUsuario, String contrasenha, boolean activo) {
+	public Usuario(Long id, String username, String password, String name, String firstName, String secondName,
+			String email, boolean activo, Set<Rol> roles) {
 		super();
 		this.id = id;
-		this.username = nombreUsuario;
-		this.contrasenha = contrasenha;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.firstName = firstName;
+		this.secondName = secondName;
+		this.email = email;
 		this.activo = activo;
-		roles = new HashSet<Rol>();
+		this.roles = roles;
 	}
 
 	public Long getId() {
@@ -74,20 +69,20 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getContrasenha() {
-		return contrasenha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContrasenha(String contrasenha) {
-		this.contrasenha = contrasenha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public boolean isActivo() {
+	public boolean isActive() {
 		return activo;
 	}
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
+	public void setActive(boolean active) {
+		this.activo = active;
 	}
 
 	public Set<Rol> getRoles() {
@@ -106,29 +101,38 @@ public class Usuario {
 		this.username = username;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getApellido1() {
-		return apellido1;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getApellido2() {
-		return apellido2;
+	public String getSecondName() {
+		return secondName;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
 	}
-	
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 }

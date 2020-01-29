@@ -1,7 +1,6 @@
 package com.wirtz.vanesa.vista.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class UserForm {
@@ -10,28 +9,35 @@ public class UserForm {
 	
 	@NotNull(message="El nombre de usuario es obligatorio")
 	@NotBlank(message="El nombre de usuario no puede estar en blanco")
-	private String nombreUsuario;
+	private String username;
 	
-	private String contrasenha;
+	private String password;
 	
-	private String contrasenha2;
+	private String password2;
 
-	private String nombre;
+	private String name;
 	
-	private String apellido1;
+	private String firstName;
 	
-	private String apellido2;
+	private String secondName;
 
-
+	private String email;
+	
 	public UserForm() {
 	}
 	
-	public UserForm(Long id, String username, String contrasenha, String contrasenha2) {
+	public UserForm(Long id,
+			@NotNull(message = "El nombre de usuario es obligatorio") @NotBlank(message = "El nombre de usuario no puede estar en blanco") String username,
+			String password, String password2, String name, String firstName, String secondName, String email) {
 		super();
 		this.id = id;
-		this.nombreUsuario = username;
-		this.contrasenha = contrasenha;
-		this.contrasenha2 = contrasenha2;
+		this.username = username;
+		this.password = password;
+		this.password2 = password2;
+		this.name = name;
+		this.firstName = firstName;
+		this.secondName = secondName;
+		this.email = email;
 	}
 
 	public Long getId() {
@@ -42,52 +48,61 @@ public class UserForm {
 		this.id = id;
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getContrasenha() {
-		return contrasenha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContrasenha(String contrasenha) {
-		this.contrasenha = contrasenha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getContrasenha2() {
-		return contrasenha2;
+	public String getPassword2() {
+		return password2;
 	}
 
-	public void setContrasenha2(String contrasenha2) {
-		this.contrasenha2 = contrasenha2;
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getApellido1() {
-		return apellido1;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getApellido2() {
-		return apellido2;
+	public String getSecondName() {
+		return secondName;
 	}
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 }

@@ -11,4 +11,5 @@ import com.wirtz.vanesa.persistencia.entidades.Usuario;
 @Repository
 public interface UserRepository extends JpaRepository<Usuario, Long>{
 	public Optional<Usuario> findByUsername(String username);
+	public Optional<Usuario> findByUsernameAndFirstName(String username, String firstName);
 }
