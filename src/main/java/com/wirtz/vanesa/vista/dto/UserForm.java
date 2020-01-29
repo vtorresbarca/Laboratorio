@@ -1,5 +1,6 @@
 package com.wirtz.vanesa.vista.dto;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,7 @@ public class UserForm {
 	
 	private String secondName;
 
+	@Email
 	private String email;
 	
 	public UserForm() {
