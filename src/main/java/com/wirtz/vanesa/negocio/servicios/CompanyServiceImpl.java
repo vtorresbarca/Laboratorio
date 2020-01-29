@@ -1,0 +1,18 @@
+package com.wirtz.vanesa.negocio.servicios;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.wirtz.vanesa.persistencia.entidades.Company;
+import com.wirtz.vanesa.persistencia.repositorio.CompanyRepository;
+
+public class CompanyServiceImpl implements CompanyService{
+
+	@Autowired
+	CompanyRepository companyRepo;
+	
+	@Override
+	public void saveCompany(Company company) {
+		companyRepo.save(company);
+	}
+
+}

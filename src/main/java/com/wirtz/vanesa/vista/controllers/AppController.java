@@ -26,8 +26,4 @@ public class AppController {
 		return "user";
 	}
 
-	@GetMapping("/tutorial")
-	public String tutorial() {
-		return "tutorialAutorizaciones";
-	}
 }

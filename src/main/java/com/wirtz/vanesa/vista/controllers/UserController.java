@@ -25,7 +25,7 @@ public class UserController {
 		model.addAttribute("newUser", new UserForm());
 		return "crearUsuario";
 	}
-	
+	 
 	@PostMapping("/createUser")
 	public String crearUsuarioNuevo(@Valid@ModelAttribute("newUser") UserForm newUser, BindingResult result, Model model) {
 	

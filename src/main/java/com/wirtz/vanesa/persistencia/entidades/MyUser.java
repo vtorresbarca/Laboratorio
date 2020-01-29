@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
  * con sus roles correspondientes*/
 
 @Entity
-public class Usuario {
+public class MyUser {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -37,17 +37,17 @@ public class Usuario {
 	private boolean activo;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name="roles_usuarios",
-	joinColumns=@JoinColumn(name="id_usuario"),
+	@JoinTable(name="roles_users",
+	joinColumns=@JoinColumn(name="id_user"),
 	inverseJoinColumns=@JoinColumn(name="id_rol"))
 	private Set<Rol> roles = new HashSet<Rol>();
 
 	
-	public Usuario() {
+	public MyUser() {
 		super();
 	}
 
-	public Usuario(Long id, String username, String password, String name, String firstName, String secondName,
+	public MyUser(Long id, String username, String password, String name, String firstName, String secondName,
 			String email, boolean activo, Set<Rol> roles) {
 		super();
 		this.id = id;

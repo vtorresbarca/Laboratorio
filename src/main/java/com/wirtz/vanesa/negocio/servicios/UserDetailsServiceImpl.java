@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.persistencia.entidades.Rol;
-import com.wirtz.vanesa.persistencia.entidades.Usuario;
+import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.persistencia.repositorio.UserRepository;
 
 /*El UserDetailsService recupera de base de datos la información del usuario 
@@ -29,13 +29,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		//Buscamos el usuario con findByUsername
-		Usuario usuarioBuscado = usuarioRepo.findByUsername(username)
+		MyUser foundUser = usuarioRepo.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("No existe usuario"));
 		
 		//Creamos la lista de los roles/accessos que tiene el usuario
 		Set<GrantedAuthority>listaRoles = new HashSet<GrantedAuthority>(); 
 
-	    for (Rol rol: usuarioBuscado.getRoles()) {
+	    for (Rol rol: foundUser.getRoles()) {
 	        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(rol.getName());
 	            listaRoles.add(grantedAuthority);
 	    }
@@ -43,8 +43,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    /*Creamos un objeto UserDetails para retornarlo
 	    (es el que necesita Spring Security para trabajar)*/
 	    UserDetails usuarioFinal = (UserDetails) new User(
-	    							usuarioBuscado.getUsername(),
-	    							usuarioBuscado.getPassword(),
+	    							foundUser.getUsername(),
+	    							foundUser.getPassword(),
 	    							listaRoles);
 	   
 		return usuarioFinal;
