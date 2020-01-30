@@ -39,19 +39,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void borrarUsuario(Long id) {
+	public void deleteUser(Long id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void modificarUsuario(Long id, String username, String password) {
+	public void updateUser(Long id, String username, String password) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public MyUser verDatosUsuario(Long id) {
+	public MyUser readUser(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

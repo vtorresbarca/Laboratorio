@@ -13,9 +13,13 @@ public class Center {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long idCenter;
 	
+	private String name;
+	
 	private String direction;
 	
 	private String province;
+	
+	private Long telephone;
 	
 	@ManyToOne
 	private Company company;
@@ -24,11 +28,13 @@ public class Center {
 		
 	}
 
-	public Center(Long idCenter, String direction, String province, Company company) {
+	public Center(Long idCenter, String name, String direction, String province, Long telefone, Company company) {
 		super();
 		this.idCenter = idCenter;
+		this.name = name;
 		this.direction = direction;
 		this.province = province;
+		this.telephone = telefone;
 		this.company = company;
 	}
 
@@ -63,5 +69,21 @@ public class Center {
 	public void setCompany(Company company) {
 		this.company = company;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(Long telephone) {
+		this.telephone = telephone;
+	}
+
 }

@@ -1,10 +1,12 @@
 package com.wirtz.vanesa.negocio.servicios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.persistencia.entidades.Company;
 import com.wirtz.vanesa.persistencia.repositorio.CompanyRepository;
 
+@Service
 public class CompanyServiceImpl implements CompanyService{
 
 	@Autowired

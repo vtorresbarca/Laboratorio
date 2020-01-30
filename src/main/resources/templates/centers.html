@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Lista de centros</title>
 </head>
 <body>
-	Lista de centros
-	
+	<h1>Lista de centros</h1>
 	<!-- Crear la tabla: https://stackoverflow.com/questions/24614113/create-a-table-in-thymeleaf -->
+	<table>
+		<tr>
+			<th>Nombre</th>
+			<th>Dirección</th>
+			<th>Provincia</th>
+			<th>Teléfono</th>
+		</tr>
+		
+		<th:block th:each="center : ${centers}">
+			<tr>
+				<td th:text="${center.name}"></td>
+				<td th:text="${center.direction}"></td>
+				<td th:text="${center.province}"></td>
+				<td th:text="${center.telephone}"></td>
+			</tr>
+		</th:block>
+	</table>
 </body>
 </html>

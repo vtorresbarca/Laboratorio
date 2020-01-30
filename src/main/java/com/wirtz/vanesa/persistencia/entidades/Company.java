@@ -15,8 +15,6 @@ public class Company {
 	
 	private String name;
 	
-	private String sector;
-	
 	private String username;
 	
 	private String password;
@@ -24,19 +22,27 @@ public class Company {
 	@OneToMany(mappedBy="company")
 	private List<Center> centers = new ArrayList<Center>();
 	
+	/*
+	 * @OneToMany(mappedBy="companyClient") private Set<MyUser> clients = new
+	 * HashSet<MyUser>();
+	 * 
+	 * Para implementar más adelante: El cliente se crea la cuenta e indica
+	 * de que empresa es cliente. Dependiendo de la empresa del cliente mostramos
+	 * unos centros u otros. Validar si existe la empresa y tiene ese cliente
+	 */
+	
 	public Company() {
 		super();
 	}
 
-	public Company(String cif, String name, String sector, String username, 
-			String password, List<Center> centers) {
+	public Company(String nif, String name, String username, String password, List<Center> centers) {
 		super();
-		this.nif = cif;
+		this.nif = nif;
 		this.name = name;
-		this.sector = sector;
 		this.username = username;
 		this.password = password;
 		this.centers = centers;
+		//this.clients = clients;
 	}
 
 	public String getNif() {
@@ -53,14 +59,6 @@ public class Company {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getSector() {
-		return sector;
-	}
-
-	public void setSector(String sector) {
-		this.sector = sector;
 	}
 
 	public String getUsername() {
@@ -87,4 +85,9 @@ public class Company {
 		this.centers = centers;
 	}
 
+	/*
+	 * public Set<MyUser> getClients() { return clients; }
+	 * 
+	 * public void setClients(Set<MyUser> clients) { this.clients = clients; }
+	 */
 }

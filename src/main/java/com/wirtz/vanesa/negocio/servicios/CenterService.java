@@ -11,4 +11,5 @@ import com.wirtz.vanesa.persistencia.entidades.Company;
 public interface CenterService {
 
 	List<Center> findByCompany(Company company);
+	void saveCenter(Center center);
 }
