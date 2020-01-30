@@ -9,10 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.wirtz.vanesa.excepciones.DifferentPasswords;
-import com.wirtz.vanesa.negocio.servicios.UserService;
-import com.wirtz.vanesa.vista.dto.UserForm;
+import com.wirtz.vanesa.negocio.servicios.user.UserService;
+import com.wirtz.vanesa.vista.dto.user.UserForm;
 
 @Controller
 public class UserController {
@@ -22,7 +23,10 @@ public class UserController {
 	
 	@GetMapping("/createUser")
 	public String createUser(Model model) {
+		UserForm newUser =  new UserForm();
+	    model.addAttribute("isCompany", newUser.getIsCompany());
 		model.addAttribute("newUser", new UserForm());
+		
 		return "crearUsuario";
 	}
 	 
@@ -40,5 +44,12 @@ public class UserController {
 		}
 		
 		return "index";
+	}
+	
+	@GetMapping("/listUsers")
+	public ModelAndView listUsers() {
+		ModelAndView mav = new ModelAndView("clients");
+		mav.addObject("clients", userService.listUsers());
+		return mav;
 	}
 }

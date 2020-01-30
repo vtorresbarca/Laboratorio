@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.persistencia.repositorio;
+package com.wirtz.vanesa.persistencia.repositorio.company;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

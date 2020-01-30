@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wirtz.vanesa.negocio.servicios.CenterService;
-import com.wirtz.vanesa.negocio.servicios.CompanyService;
+import com.wirtz.vanesa.negocio.servicios.center.CenterService;
+import com.wirtz.vanesa.negocio.servicios.company.CompanyService;
 import com.wirtz.vanesa.persistencia.entidades.Center;
 import com.wirtz.vanesa.persistencia.entidades.Company;
 
@@ -61,8 +61,10 @@ public class ClientController {
 		for (Center c : centers) {
 			centerService.saveCenter(c);
 		}
-		mav.addObject("centers", centerService.findByCompany(company));
 		/*-------------------------*/
+		
+		mav.addObject("centers", centers);
+
 		return mav;
 	}
 }

@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.vista.dto;
+package com.wirtz.vanesa.vista.dto.user;
 
 public class UserBean {
 

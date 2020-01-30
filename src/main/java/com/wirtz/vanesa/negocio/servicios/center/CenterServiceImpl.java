@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.negocio.servicios;
+package com.wirtz.vanesa.negocio.servicios.center;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.persistencia.entidades.Center;
 import com.wirtz.vanesa.persistencia.entidades.Company;
-import com.wirtz.vanesa.persistencia.repositorio.CenterRepository;
+import com.wirtz.vanesa.persistencia.repositorio.center.CenterRepository;
 
 @Service
 public class CenterServiceImpl implements CenterService{

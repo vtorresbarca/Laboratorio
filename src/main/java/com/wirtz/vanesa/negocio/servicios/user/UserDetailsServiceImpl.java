@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.negocio.servicios;
+package com.wirtz.vanesa.negocio.servicios.user;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.persistencia.entidades.Rol;
+import com.wirtz.vanesa.persistencia.repositorio.user.UserRepository;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
-import com.wirtz.vanesa.persistencia.repositorio.UserRepository;
 
 /*El UserDetailsService recupera de base de datos la información del usuario 
  * (a través de nuestro UsuarioRepo) que se quiere loguear, creando un objeto de tipo UserDetails*/

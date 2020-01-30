@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.negocio.servicios;
+package com.wirtz.vanesa.negocio.servicios.company;
 
 import org.springframework.stereotype.Service;
 

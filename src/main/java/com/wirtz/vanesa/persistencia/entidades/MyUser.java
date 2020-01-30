@@ -36,6 +36,8 @@ public class MyUser {
 	
 	private boolean activo;
 	
+	private boolean isCompany;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="roles_users",
 	joinColumns=@JoinColumn(name="id_user"),
@@ -133,6 +135,14 @@ public class MyUser {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isCompany() {
+		return isCompany;
+	}
+
+	public void setIsCompany(boolean isCompany) {
+		this.isCompany = isCompany;
 	}
 	
 }

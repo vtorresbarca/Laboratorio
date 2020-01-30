@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.persistencia.repositorio;
+package com.wirtz.vanesa.persistencia.repositorio.user;
 
 import java.util.Optional;
 

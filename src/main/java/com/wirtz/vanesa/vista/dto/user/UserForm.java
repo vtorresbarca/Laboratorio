@@ -1,4 +1,4 @@
-package com.wirtz.vanesa.vista.dto;
+package com.wirtz.vanesa.vista.dto.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -25,12 +25,14 @@ public class UserForm {
 	@Email
 	private String email;
 	
+	private boolean isCompany;
+	
 	public UserForm() {
 	}
 	
 	public UserForm(Long id,
 			@NotNull(message = "El nombre de usuario es obligatorio") @NotBlank(message = "El nombre de usuario no puede estar en blanco") String username,
-			String password, String password2, String name, String firstName, String secondName, String email) {
+			String password, String password2, String name, String firstName, String secondName, String email, boolean isCompany) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -40,6 +42,7 @@ public class UserForm {
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.email = email;
+		this.isCompany = isCompany;
 	}
 
 	public Long getId() {
@@ -106,5 +109,12 @@ public class UserForm {
 		this.email = email;
 	}
 
-	
+	public boolean getIsCompany() {
+		return isCompany;
+	}
+
+	public void setCompany(boolean isCompany) {
+		this.isCompany = isCompany;
+	}
+
 }
