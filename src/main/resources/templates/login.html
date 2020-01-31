@@ -27,7 +27,7 @@
 	th:href="@{/css/login.css}">
 </head>
 <body>
-	<header th:replace="index::header"></header>
+	<header th:replace="header::header"></header>
 	
 	<form th:action="@{/login}" method="post">
 		<div class="caja-exterior">
@@ -53,6 +53,6 @@
 	<div th:if="${param.logout}" class="alert alert-success" role="alert">
 		Has cerrado la sesión</div>
 		
-	<footer th:replace="index::footer"></footer>
+	<footer th:replace="footer::footer"></footer>
 </body>
 </html>

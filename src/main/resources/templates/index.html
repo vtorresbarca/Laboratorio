@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<!--https://www.laboratoriobiosalud.com/-->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,52 +20,8 @@
 </head>
 <body>
 	<div id="pagina">
-		<header th:fragment="header">
-			<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-				<a class="navbar-brand" th:href="@{/}"><i
-					class="logo fas fa-flask"></i></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#collapsibleNavbar">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="collapsibleNavbar">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link" th:href="@{#}">Horario</a>
-						</li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" id="navbarDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false">Contacto</a>
-							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" th:href="@{/centerList}">Nuestros
-									centros</a> 
-									<a class="dropdown-item" th:href="@{#}">Formulario de contacto</a>
-									<a class="dropdown-item" sec:authorize="hasAuthority('admin')" th:href="@{/}">Añadir un centro</a>	
-							</div>
-						</li>
-						<li class="nav-item" sec:authorize="hasAuthority('admin')">
-							<a class="nav-link" th:href="@{/listUsers}">Ver clientes</a>
-						</li>
-					</ul>
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link"
-							th:href="@{/createUser}"><i class="fas fa-user"
-								id="registrarse"></i>Registrarse</a></li>
-
-						<li class="nav-item"><a class="nav-link" href="/login"
-							sec:authorize="!isAuthenticated()"> <i
-								class="fas fa-sign-in-alt"></i> Iniciar sesión
-						</a> <a class="nav-link" th:href="@{/logout}"
-							sec:authorize="isAuthenticated()"> <i
-								class="fas fa-sign-in-alt"></i> Cerrar sesión
-						</a>
-							<form th:action="@{/logout}" method="post" hidden="true">
-								<input hidden type="submit" value="Cerrar Sesion" />
-							</form></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
+		
+		<header th:replace="header::header"></header>
 		<p id="titulo">Laboratorios Galileo</p>
 		<main>
 			<div>
@@ -102,13 +57,6 @@
 			</div>
 		</main>
 	</div>
-	<footer th:fragment="footer">
-		<div>
-			<a href=""> <i class="fab fa-instagram"></i>
-			</a> <a href=""> <i class="fab fa-linkedin"></i>
-			</a> <a href=""> <i class="fab fa-twitter-square"></i>
-			</a>
-		</div>
-	</footer>
+	<footer th:replace="footer::footer"></footer>
 </body>
 </html>

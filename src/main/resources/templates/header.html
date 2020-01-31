@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+	<header th:fragment="header">
+			<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+				<a class="navbar-brand" th:href="@{/}"><i
+					class="logo fas fa-flask"></i></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" th:href="@{#}">Horario</a>
+						</li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">Contacto</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" th:href="@{/centerList}">Nuestros
+									centros</a> 
+									<a class="dropdown-item" th:href="@{#}">Formulario de contacto</a>
+									<a class="dropdown-item" sec:authorize="hasAuthority('admin')" th:href="@{/}">Añadir un centro</a>	
+							</div>
+						</li>
+						<li class="nav-item" sec:authorize="hasAuthority('admin')">
+							<a class="nav-link" th:href="@{/listUsers}">Ver clientes</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/createUser}" sec:authorize="!isAuthenticated()">
+							<i class="fas fa-user" id="registrarse"></i>Registrarse</a>
+							<a class="nav-link" th:href="@{/userProfile}" sec:authorize="hasAuthority('user')">
+							<i class="fas fa-user" id="profile"></i>Mi perfil</a>
+						</li>
+
+						<li class="nav-item"><a class="nav-link" th:href="@{/login}"
+							sec:authorize="!isAuthenticated()"> <i
+								class="fas fa-sign-in-alt"></i> Iniciar sesión
+						</a> <a class="nav-link" th:href="@{/logout}"
+							sec:authorize="isAuthenticated()"> <i
+								class="fas fa-sign-in-alt"></i> Cerrar sesión
+						</a>
+							<form th:action="@{/logout}" method="post" hidden="true">
+								<input type="submit" value="Cerrar Sesion" />
+							</form></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+</body>
+</html>

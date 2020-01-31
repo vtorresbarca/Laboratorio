@@ -19,7 +19,7 @@
 	th:href="@{/css/login.css}">
 </head>
 <body>
-	<header th:replace="index::header"></header>
+	<header th:replace="header::header"></header>
 	
 	<form th:action="@{/createUser}" th:object="${newUser}" method="post">
 		<div class="caja-exterior">
@@ -73,6 +73,6 @@
 		</div>
 	</form>
 	
-	<footer th:replace="index::footer"></footer>
+	<footer th:replace="footer::footer"></footer>
 </body>
 </html>

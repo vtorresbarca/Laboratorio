@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+<title>Perfil de usuario</title>
+</head>
+<body>
+	<header th:replace="header::header"></header>
+		<div>
+			<h1>Bienvenido &nbsp;<i th:text="${user.name}"></i></h1>
+			
+			<ul>
+				<li>Nombre: <i th:text="${user.name}"></i></li>
+				<li>Apellidos: <i th:text="${user.firstName}"></i>
+							   <i th:text="${user.secondName}"></i>
+				</li>
+				<li>Correo electrónico: <i th:text="${user.email}"></i></li>
+			</ul>
+		</div>
+		
+		<!--<form th:action="@{/deleteUser}" method="post">
+			<button type="submit" name="delete">Darme de baja</button>
+		</form>-->
+		<a th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
+	<footer th:replace="footer::footer"></footer>
+</body>
+</html>

@@ -56,7 +56,7 @@ main {
     font-size: 30px;
 }
 
-#registrarse, #iniciarSesion, .fa-sign-in-alt{
+#registrarse, #iniciarSesion, #profile, .fa-sign-in-alt{
     font-size: 25px;
     letter-spacing: .5em;
 }
