@@ -12,6 +12,7 @@ import com.wirtz.vanesa.vista.dto.user.UserForm;
 @Service
 public interface UserService {
 
+	void expireUserSessions(String username);
 	void createUser(UserForm usuario) throws DifferentPasswords;
 	void deleteUser(MyUser user);
 	void updateUser(Long id, String username, String password);

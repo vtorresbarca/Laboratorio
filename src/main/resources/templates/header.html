@@ -41,11 +41,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 							<i class="fas fa-user" id="profile"></i>Mi perfil</a>
 						</li>
 
-						<li class="nav-item"><a class="nav-link" th:href="@{/login}"
-							sec:authorize="!isAuthenticated()"> <i
-								class="fas fa-sign-in-alt"></i> Iniciar sesión
-						</a> <a class="nav-link" th:href="@{/logout}"
-							sec:authorize="isAuthenticated()"> <i
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()"> 
+							<i class="fas fa-sign-in-alt"></i> Iniciar sesión</a> 
+							<a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()"> <i
 								class="fas fa-sign-in-alt"></i> Cerrar sesión
 						</a>
 							<form th:action="@{/logout}" method="post" hidden="true">

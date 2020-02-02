@@ -73,8 +73,9 @@ public class UserController {
 	  
 	    if(user != null) {
 	    	userService.deleteUser(user);
+	    	userService.expireUserSessions(username);
 	    }
 	    
-	    return "index";
+	    return "redirect:/";
 	}
 }

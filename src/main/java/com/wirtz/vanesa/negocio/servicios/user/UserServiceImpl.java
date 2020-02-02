@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +32,22 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepo;
 
+    @Autowired
+    private SessionRegistry sessionRegistry;
+    
+    public void expireUserSessions(String username) {
+        for (Object principal : sessionRegistry.getAllPrincipals()) {
+            if (principal instanceof User) {
+                UserDetails userDetails = (UserDetails) principal;
+                if (userDetails.getUsername().equals(username)) {
+                    for (SessionInformation information : sessionRegistry.getAllSessions(userDetails, true)) {
+                        information.expireNow();
+                    }
+                }
+            }
+        }
+    }
+    
 	@Override
 	public void createUser(UserForm usuarioForm) throws DifferentPasswords {
 
@@ -84,7 +104,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserBean> listUsers() {
-		// TODO: esto tiene que devolver un UserBean
+		
 		List<UserBean> clientsUser = new ArrayList<UserBean>();
 		for(MyUser user : userRepo.findAll()) {
 			for(Rol rol : user.getRoles()) {

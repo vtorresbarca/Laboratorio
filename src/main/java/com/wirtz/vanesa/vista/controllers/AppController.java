@@ -15,15 +15,5 @@ public class AppController {
 	public String login() {
 		return "login";
 	}
-	
-	@GetMapping("/menu")
-	public String menu() {
-		return "menu";
-	}
-
-	@GetMapping("/user")
-	public String user() {
-		return "user";
-	}
 
 }
