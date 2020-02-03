@@ -27,13 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.sessionManagement().maximumSessions(100) // (1)
-				.maxSessionsPreventsLogin(false) // (2)
-				.expiredUrl("/") // (3)
-				.sessionRegistry(sessionRegistry()); // (4)
+		http.sessionManagement().maximumSessions(100)
+				.maxSessionsPreventsLogin(false)
+				.expiredUrl("/")
+				.sessionRegistry(sessionRegistry());
 
 		http.authorizeRequests().antMatchers("/admin*").hasAuthority("admin")
-				// .antMatchers("/admin/soloAdmin").hasAuthority("admin")
 				.antMatchers("/user*").hasAuthority("user").antMatchers("/**").permitAll().and().formLogin()
 				.loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true")
 				.usernameParameter("username").passwordParameter("password").and().logout()
@@ -48,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public static ServletListenerRegistrationBean httpSessionEventPublisher() { // (5)
+	public static ServletListenerRegistrationBean httpSessionEventPublisher() {
 		return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
 	}
 

@@ -43,6 +43,7 @@ public class UserController {
 			try {
 				userService.createUser(newUser);
 			} catch (DifferentPasswords e) {
+				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
 				return "crearUsuario";
 			}
 		}

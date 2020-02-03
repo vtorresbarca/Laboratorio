@@ -20,21 +20,20 @@
 </head>
 <body>
 	<header th:replace="header::header"></header>
-		<div>
-			<h1>Bienvenido &nbsp;<i th:text="${user.name}"></i></h1>
-			
-			<ul>
-				<li>Nombre: <i th:text="${user.name}"></i></li>
-				<li>Apellidos: <i th:text="${user.firstName}"></i>
-							   <i th:text="${user.secondName}"></i>
-				</li>
-				<li>Correo electrónico: <i th:text="${user.email}"></i></li>
-			</ul>
+		<div class="contenedor">
+			<div id="profile-title">
+				<h1>Bienvenido/a &nbsp;<i th:text="${user.name}"></i></h1>
+			</div>
+			<div id="profile-box">
+				<div id="datos">
+					<p>Nombre: <i th:text="${user.name}"></i></p>
+					<p>Apellidos: <i th:text="${user.firstName}"></i>
+							   	  <i th:text="${user.secondName}"></i></p>
+					<p>Correo electrónico: <i th:text="${user.email}"></i></p>
+				</div>
+			</div>
 		</div>
 		
-		<!--<form th:action="@{/deleteUser}" method="post">
-			<button type="submit" name="delete">Darme de baja</button>
-		</form>-->
 		<a th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
 	<footer th:replace="footer::footer"></footer>
 </body>

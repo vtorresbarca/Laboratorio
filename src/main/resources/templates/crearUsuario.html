@@ -25,21 +25,6 @@
 		<div class="caja-exterior">
 			<h1>Registrarse</h1>
 			<div id="caja-intermedia">
-				<div class="caja-texto">
-					<input type="text" 
-						placeholder="Nombre de usuario" th:field="*{username}"/>
-					<span class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-				</div>
-				
-				<div class="caja-texto">
-					<input type="password" 
-						placeholder="Contrasena" th:field="*{password}" />
-				</div>
-				
-				<div class="caja-texto">
-					<input type="password" 
-						placeholder="Confirme contrasenha" th:field="*{password2}" />
-				</div>
 				
 				<div class="caja-texto">
 					<input type="text"
@@ -63,6 +48,25 @@
 					<input type="text"
 						placeholder="Correo electrónico" th:field="*{email}"/>
 					<span class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				</div>
+				
+				<div class="caja-texto">
+					<input type="text" 
+						placeholder="Nombre de usuario" th:field="*{username}"/>
+					<span class="form-text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+				</div>
+				
+				<div class="caja-texto">
+					<input type="password" 
+						placeholder="Contrasena" th:field="*{password}" />
+						<div th:if="${#fields.hasErrors('password')}" class="alert alert-danger">
+							<span   th:errors="*{password}"></span> 
+						</div>
+				</div>
+				
+				<div class="caja-texto">
+					<input type="password" 
+						placeholder="Confirme contrasenha" th:field="*{password2}" />
 				</div>
 				
 			</div>
