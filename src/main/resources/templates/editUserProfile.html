@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>User profile</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Los iconos tipo Solid de Fontawesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+<body>
+	<header th:replace="header::header"></header>
+
+	<form th:action="@{/editUser}" th:object="${editUser}" method="post">
+		<div class="caja-exterior">
+			<h1>Editar mis datos</h1>
+			<div id="caja-intermedia">
+
+				<div class="caja-texto">
+					<input type="text" placeholder="Nombre" th:field="*{name}"
+						th:value="${name}" />
+					<span class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				</div>
+
+				<div class="caja-texto">
+					<input type="text" placeholder="Primer apellido"
+						th:field="*{firstName}" th:value="${firstName}" />
+					<span class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+				</div>
+
+				<div class="caja-texto">
+					<input type="text" placeholder="Segundo apellido"
+						th:field="*{secondName}" th:value="${secondName}" />
+					<span class="form-text text-danger" th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}"></span>
+				</div>
+
+				<div class="caja-texto">
+					<input type="text" placeholder="Correo electrónico"
+						th:field="*{email}" th:value="${email}" />
+					<span class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+				</div>
+
+				<div class="caja-texto">
+					<input type="text" placeholder="Nombre de usuario"
+						th:field="*{username}" th:value="${username}"/> <span class="form-text text-danger"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+				</div>
+
+				<div class="caja-texto">
+					<input type="password" placeholder="Contrasena"
+						th:field="*{password}" th:value="${password}"/>
+					<div th:if="${#fields.hasErrors('password')}"
+						class="alert alert-danger">
+						<span th:errors="*{password}"></span>
+					</div>
+				</div>
+
+				<div class="caja-texto">
+					<input type="password" placeholder="Confirme contrasenha"
+						th:field="*{password2}" th:value="${password2}"/>
+				</div>
+			</div>
+
+			<button type="submit" class="boton" name="editUser">
+				<i class="fas fa-sign-in-alt"></i> Crear
+			</button>
+		</div>
+	</form>
+
+	<footer th:replace="footer::footer"></footer>
+</body>
+</html>

@@ -15,10 +15,10 @@ public interface UserService {
 
 	void expireUserSessions(String username);
 	void createUser(UserForm usuario) throws DifferentPasswords, UsernameAlreadyExists;
-	void deleteUser(MyUser user);
-	void updateUser(Long id, String username, String password);
+	void deleteByUsername(String username);
+	void updateUser(UserForm editUser) throws DifferentPasswords;
 	UserBean findUserById(Long id);
-	MyUser findUserByUsername(String username);
+	UserBean findUserByUsername(String username);
 	List<UserBean> listUsers(); 
 	UserBean convertEntityToBean(MyUser userEntity);
 	MyUser convertFormToEntity(UserForm user);

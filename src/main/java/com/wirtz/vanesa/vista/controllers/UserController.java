@@ -19,6 +19,7 @@ import com.wirtz.vanesa.excepciones.DifferentPasswords;
 import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
 import com.wirtz.vanesa.negocio.servicios.user.UserService;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
+import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
 @Controller
@@ -68,21 +69,41 @@ public class UserController {
 	@GetMapping("/userProfile")
 	public String showProfile(Principal principal, Model model) {
 		String username = principal.getName();
-		MyUser user = userService.findUserByUsername(username);
-		model.addAttribute("user", userService.convertEntityToBean(user));
+		UserBean user = userService.findUserByUsername(username);
+		model.addAttribute("user", user);
 
 		return "userProfile";
 	}
 	
-	@GetMapping("/deleteUser")
+	@PostMapping("/deleteUser")
 	public String deleteUser(@RequestParam(name="username")String username) {
-	    MyUser user = userService.findUserByUsername(username);
-	  
-	    if(user != null) {
-	    	userService.deleteUser(user);
+
+	    if(!username.isEmpty()) {
+	    	userService.deleteByUsername(username);
 	    	userService.expireUserSessions(username);
 	    }
 	    
 	    return "redirect:/";
+	}
+	
+	@GetMapping("/editUser")
+	public String editUser() {
+		return "editUserProfile";
+	}
+	
+	@PostMapping("/editUser")
+	public String editUser(@Valid@ModelAttribute("editUser") UserForm editUser, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "editUserProfile";
+		}else {
+			try {
+				userService.updateUser(editUser);
+			}catch (DifferentPasswords ex) {
+				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
+				return "editUserProfile";
+
+			}
+		}
+		return "userProfile";
 	}
 }

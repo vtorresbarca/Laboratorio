@@ -22,7 +22,9 @@
 	<header th:replace="header::header"></header>
 		<div class="contenedor">
 			<div id="profile-title">
-				<h1>Bienvenido/a &nbsp;<i th:text="${user.name}"></i></h1>
+				<h1>Bienvenido/a &nbsp;<i th:text="${user.name}"></i>
+					<a th:href="@{/editUser(id=${user.id})}">Editar</a>
+				</h1>
 			</div>
 			<div id="profile-box">
 				<div id="datos">

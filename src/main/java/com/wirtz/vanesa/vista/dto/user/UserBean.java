@@ -2,6 +2,8 @@ package com.wirtz.vanesa.vista.dto.user;
 
 public class UserBean {
 
+	private Long id;
+	
 	private String username;
 
 	private String name;
@@ -16,8 +18,9 @@ public class UserBean {
 		
 	}
 
-	public UserBean(String username, String name, String firstName, String secondName, String email) {
+	public UserBean(Long id, String username, String name, String firstName, String secondName, String email) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.name = name;
 		this.firstName = firstName;
@@ -63,6 +66,14 @@ public class UserBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
