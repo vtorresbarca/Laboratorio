@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wirtz.vanesa.excepciones.DifferentPasswords;
+import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
 import com.wirtz.vanesa.negocio.servicios.user.UserService;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
@@ -42,8 +43,13 @@ public class UserController {
 		}else {
 			try {
 				userService.createUser(newUser);
+				
 			} catch (DifferentPasswords e) {
 				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
+				return "crearUsuario";
+				
+			} catch (UsernameAlreadyExists u) {
+				result.rejectValue("username", "error.username", "Ese nombre de usuario ya existe, introduzca otro");
 				return "crearUsuario";
 			}
 		}

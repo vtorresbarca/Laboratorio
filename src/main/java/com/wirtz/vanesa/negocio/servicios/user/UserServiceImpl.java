@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.excepciones.DifferentPasswords;
+import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.persistencia.entidades.Rol;
 import com.wirtz.vanesa.persistencia.repositorio.rol.RolRepository;
@@ -49,22 +50,41 @@ public class UserServiceImpl implements UserService {
     }
     
 	@Override
-	public void createUser(UserForm usuarioForm) throws DifferentPasswords {
-
+	public void createUser(UserForm usuarioForm) throws DifferentPasswords, UsernameAlreadyExists {
+		
+	
+		
 		if (usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
-			MyUser userEntity = convertFormToEntity(usuarioForm);
-			Rol newRol = new Rol();
+			
+			if(!usernameExists(usuarioForm)) {
+				MyUser userEntity = convertFormToEntity(usuarioForm);
+				Rol newRol = new Rol();
 
-			newRol.setName("user");
+				newRol.setName("admin");
 
-			rolRepo.save(newRol);
-			userEntity.getRoles().add(newRol);
-			userRepo.save(userEntity);
+				rolRepo.save(newRol);
+				userEntity.getRoles().add(newRol);
+				userRepo.save(userEntity);	
+			}else {
+				throw new UsernameAlreadyExists("Ese nombre de usuario ya existe, introduzca otro");
+			}
+		
 		} else {
 			throw new DifferentPasswords("Las contraseñas no coinciden, vuelva a intentarlo");
 		}
 	}
 
+	private boolean usernameExists(UserForm userForm) {
+		try {
+			if(userForm.getUsername().equals(userRepo.findByUsername(userForm.getUsername()).get().getUsername())) {
+				return true;
+			}
+		} catch(java.util.NoSuchElementException e){
+			return false;
+		}
+		return false;
+	}
+	
 	@Override
 	public void deleteUser(MyUser user) {
 		userRepo.delete(user);
