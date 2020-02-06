@@ -7,7 +7,7 @@ import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserEditForm;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
-public class Converter {
+public class Utils {
 
 	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -39,5 +39,28 @@ public class Converter {
 		miUsuario.setSecondName(user.getSecondName());
 		miUsuario.setEmail(user.getEmail());
 		return miUsuario;
+	}
+	
+	public static MyUser setProperties(MyUser myUser, UserForm userForm) {
+		if((userForm.getUsername()!= null)||!userForm.getUsername().isEmpty()) {
+			myUser.setUsername(userForm.getUsername());
+		}
+		if((userForm.getPassword()!= null)||!userForm.getPassword().isEmpty()) {
+			myUser.setPassword(encoder.encode(userForm.getPassword()));
+		}
+		if((userForm.getName()!= null)||!userForm.getName().isEmpty()) {
+			myUser.setName(userForm.getName());
+		}
+		if((userForm.getFirstName()!= null)||!userForm.getFirstName().isEmpty()) {
+			myUser.setFirstName(userForm.getFirstName());
+		}
+		if((userForm.getSecondName()!= null)||!userForm.getSecondName().isEmpty()) {
+			myUser.setSecondName(userForm.getSecondName());
+		}
+		if((userForm.getEmail()!= null)||!userForm.getEmail().isEmpty()) {
+			myUser.setEmail(userForm.getEmail());
+		}
+		
+		return myUser;
 	}
 }

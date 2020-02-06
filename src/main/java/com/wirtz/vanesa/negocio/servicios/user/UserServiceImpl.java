@@ -19,7 +19,7 @@ import com.wirtz.vanesa.negocio.servicios.rol.RolServiceImpl;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.persistencia.entidades.Rol;
 import com.wirtz.vanesa.persistencia.repositorio.user.UserRepository;
-import com.wirtz.vanesa.utils.Converter;
+import com.wirtz.vanesa.utils.Utils;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 		if (usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
 
 			if (!usernameExists(usuarioForm)) {
-				MyUser userEntity = Converter.convertFormToEntity(usuarioForm);
+				MyUser userEntity = Utils.convertFormToEntity(usuarioForm);
 				rolService.saveRol(userEntity, "user");
 				userRepo.save(userEntity);
 			} else {
@@ -90,15 +90,14 @@ public class UserServiceImpl implements UserService {
 		}else if(userForm.getPassword().isEmpty()) {
 			throw new EditPasswordEmpty();
 		}
-			MyUser myUserFormId = userRepo.findByUsername(userForm.getUsername()).get();
-			userForm.setId(myUserFormId.getId());
-			userRepo.save(Converter.convertFormToEntity(userForm));
+			MyUser myUser = userRepo.findByUsername(userForm.getUsername()).get();
+			userRepo.save(Utils.setProperties(myUser, userForm));
 	}
 
 	@Override
 	public UserBean findUserById(Long id) {
 		Optional<MyUser> foundUser = (userRepo.findById(id));
-		return Converter.convertEntityToBean(foundUser.get());
+		return Utils.convertEntityToBean(foundUser.get());
 	}
 
 	
@@ -110,7 +109,7 @@ public class UserServiceImpl implements UserService {
 		for (MyUser user : userRepo.findAll()) {
 			for (Rol rol : user.getRoles()) {
 				if (rol.getName().equals("user")) {
-					clientsUser.add(Converter.convertEntityToBean(user));
+					clientsUser.add(Utils.convertEntityToBean(user));
 				}
 			}
 		}
@@ -121,7 +120,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserBean findUserByUsername(String username) {
 		Optional<MyUser> foundUser = (userRepo.findByUsername(username));
-		return Converter.convertEntityToBean(foundUser.get());
+		return Utils.convertEntityToBean(foundUser.get());
 	}
 
 }
