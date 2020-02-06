@@ -9,23 +9,22 @@ import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wirtz.vanesa.excepciones.DifferentPasswords;
+import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
+import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
 import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
 import com.wirtz.vanesa.negocio.servicios.rol.RolServiceImpl;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.persistencia.entidades.Rol;
 import com.wirtz.vanesa.persistencia.repositorio.user.UserRepository;
+import com.wirtz.vanesa.utils.Converter;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-	@Autowired
-	BCryptPasswordEncoder encoder;
 
 	@Autowired
 	private UserRepository userRepo;
@@ -55,8 +54,8 @@ public class UserServiceImpl implements UserService {
 		if (usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
 
 			if (!usernameExists(usuarioForm)) {
-				MyUser userEntity = convertFormToEntity(usuarioForm);
-				rolService.createRol(userEntity, "user");
+				MyUser userEntity = Converter.convertFormToEntity(usuarioForm);
+				rolService.saveRol(userEntity, "user");
 				userRepo.save(userEntity);
 			} else {
 				throw new UsernameAlreadyExists("Ese nombre de usuario ya existe, introduzca otro");
@@ -85,38 +84,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserForm userForm) throws DifferentPasswords {
-		if (userForm.getPassword().contentEquals(userForm.getPassword2())) {
-
-			MyUser user = convertFormToEntity(userForm);
-			userRepo.save(user);
-
-		} else {
-			throw new DifferentPasswords("Las contraseñas no coinciden, vuelva a intentarlo");
+	public void updateUser(UserForm userForm) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty{
+		if(userForm.getUsername().isEmpty()) {
+			throw new EditUsernameEmpty();
+		}else if(userForm.getPassword().isEmpty()) {
+			throw new EditPasswordEmpty();
 		}
+			MyUser myUserFormId = userRepo.findByUsername(userForm.getUsername()).get();
+			userForm.setId(myUserFormId.getId());
+			userRepo.save(Converter.convertFormToEntity(userForm));
 	}
 
 	@Override
 	public UserBean findUserById(Long id) {
 		Optional<MyUser> foundUser = (userRepo.findById(id));
-		return convertEntityToBean(foundUser.get());
+		return Converter.convertEntityToBean(foundUser.get());
 	}
 
-	public MyUser convertFormToEntity(UserForm user) {
-		MyUser miUsuario = new MyUser();
-		miUsuario.setUsername(user.getUsername());
-		miUsuario.setPassword(encoder.encode(user.getPassword()));
-		miUsuario.setName(user.getName());
-		miUsuario.setFirstName(user.getFirstName());
-		miUsuario.setSecondName(user.getSecondName());
-		miUsuario.setEmail(user.getEmail());
-		return miUsuario;
-	}
-
-	public UserBean convertEntityToBean(MyUser userEntity) {
-		return new UserBean(userEntity.getId(), userEntity.getUsername(), userEntity.getName(), userEntity.getFirstName(),
-				userEntity.getSecondName(), userEntity.getEmail());
-	}
+	
 
 	@Override
 	public List<UserBean> listUsers() {
@@ -125,7 +110,7 @@ public class UserServiceImpl implements UserService {
 		for (MyUser user : userRepo.findAll()) {
 			for (Rol rol : user.getRoles()) {
 				if (rol.getName().equals("user")) {
-					clientsUser.add(convertEntityToBean(user));
+					clientsUser.add(Converter.convertEntityToBean(user));
 				}
 			}
 		}
@@ -136,7 +121,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserBean findUserByUsername(String username) {
 		Optional<MyUser> foundUser = (userRepo.findByUsername(username));
-		return convertEntityToBean(foundUser.get());
+		return Converter.convertEntityToBean(foundUser.get());
 	}
 
 }

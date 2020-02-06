@@ -1,6 +1,7 @@
 package com.wirtz.vanesa.vista.dto.user;
 
-public class UserBean {
+public class UserEditBean {
+
 
 	private Long id;
 	
@@ -15,13 +16,15 @@ public class UserBean {
 	private String email;
 	
 	private String password;
-
-	public UserBean() {
+	
+	private String password2;
+	
+	public UserEditBean() {
 		
 	}
 
-	public UserBean(Long id, String username, String name, String firstName, String secondName, String email,
-			String password) {
+	public UserEditBean(Long id, String username, String name, String firstName, String secondName, String email,
+			String password, String password2) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -30,6 +33,7 @@ public class UserBean {
 		this.secondName = secondName;
 		this.email = email;
 		this.password = password;
+		this.password2 = password2;
 	}
 
 	public String getUsername() {
@@ -87,4 +91,13 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+
 }

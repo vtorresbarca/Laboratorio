@@ -19,7 +19,7 @@
 <body>
 	<header th:replace="header::header"></header>
 
-	<form th:action="@{/editUser}" th:object="${editUser}" method="post">
+	<form th:action="@{/editUser}" th:object="${user}" method="post">
 		<div class="caja-exterior">
 			<h1>Editar mis datos</h1>
 			<div id="caja-intermedia">
@@ -50,8 +50,10 @@
 
 				<div class="caja-texto">
 					<input type="text" placeholder="Nombre de usuario"
-						th:field="*{username}" th:value="${username}"/> <span class="form-text text-danger"
-						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+						th:field="*{username}" th:value="${username}"/> 
+						<div th:if="${#fields.hasErrors('username')}" class="form-text text-danger">
+						 <span th:errors="*{username}"></span>
+						 </div>
 				</div>
 
 				<div class="caja-texto">
@@ -63,10 +65,6 @@
 					</div>
 				</div>
 
-				<div class="caja-texto">
-					<input type="password" placeholder="Confirme contrasenha"
-						th:field="*{password2}" th:value="${password2}"/>
-				</div>
 			</div>
 
 			<button type="submit" class="boton" name="editUser">

@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class UserForm {
+public class UserEditForm {
 
 	private Long id;
 	
@@ -26,10 +26,10 @@ public class UserForm {
 	@Email
 	private String email;
 	
-	public UserForm() {
+	public UserEditForm() {
 	}
 	
-	public UserForm(Long id,
+	public UserEditForm(Long id,
 			@NotNull(message = "El nombre de usuario es obligatorio") @NotBlank(message = "El nombre de usuario no puede estar en blanco") String username,
 			String password, String password2, String name, String firstName, String secondName, String email) {
 		super();

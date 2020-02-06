@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wirtz.vanesa.excepciones.DifferentPasswords;
+import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
+import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
 import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
 import com.wirtz.vanesa.negocio.servicios.user.UserService;
-import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
@@ -87,21 +88,31 @@ public class UserController {
 	}
 	
 	@GetMapping("/editUser")
-	public String editUser() {
+	public String editUser(Principal principal, Model model) {
+		String username = principal.getName();
+		UserBean user = userService.findUserByUsername(username);
+		model.addAttribute("user", user);
+		
 		return "editUserProfile";
 	}
 	
 	@PostMapping("/editUser")
-	public String editUser(@Valid@ModelAttribute("editUser") UserForm editUser, BindingResult result, Model model) {
+	public String editUser(@Valid@ModelAttribute("user") UserForm editUser, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "editUserProfile";
 		}else {
 			try {
+				
 				userService.updateUser(editUser);
 			}catch (DifferentPasswords ex) {
-				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
+				//result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
 				return "editUserProfile";
-
+			}catch (EditUsernameEmpty e) {
+				result.rejectValue("username", "error.username", "El nombre de usuario no puede estar vacío");
+				return "editUserProfile";
+			}catch (EditPasswordEmpty p) {
+				result.rejectValue("password", "error.password", "El campo 'contraseña' no puede estar vacío");
+				return "editUserProfile";
 			}
 		}
 		return "userProfile";

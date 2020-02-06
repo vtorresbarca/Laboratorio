@@ -7,5 +7,5 @@ import com.wirtz.vanesa.persistencia.entidades.MyUser;
 @Service
 public interface RolService {
 
-	void createRol(MyUser user, String rol);
+	void saveRol(MyUser user, String rol);
 }

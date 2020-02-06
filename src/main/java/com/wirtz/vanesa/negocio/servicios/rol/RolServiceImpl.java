@@ -14,7 +14,7 @@ public class RolServiceImpl implements RolService{
 	private RolRepository rolRepo;
 	
 	@Override
-	public void createRol(MyUser user, String rol) {
+	public void saveRol(MyUser user, String rol) {
 		Rol newRol = new Rol();
 		newRol.setName(rol);
 		rolRepo.save(newRol);

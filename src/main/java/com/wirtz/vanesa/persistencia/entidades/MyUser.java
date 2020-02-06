@@ -3,6 +3,7 @@ package com.wirtz.vanesa.persistencia.entidades;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +41,7 @@ public class MyUser {
 	
 	private boolean isCompany;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="roles_users",
 	joinColumns=@JoinColumn(name="id_user"),
 	inverseJoinColumns=@JoinColumn(name="id_rol"))
