@@ -21,22 +21,34 @@
 <body>
 	<header th:replace="header::header"></header>
 		<div class="contenedor">
-			<div id="profile-title">
-				<h1>Bienvenido/a &nbsp;<i th:text="${user.name}"></i>
-					<a th:href="@{/editUser(id=${user.id})}">Editar</a>
-				</h1>
-			</div>
+
 			<div id="profile-box">
+				<div id="profile-title">
+					<p>Perfil de: &nbsp;<i th:text="${user.name}"></i>
+						<a th:href="@{/editUser(id=${user.id})}"><i class="fas fa-user-edit"></i></a>
+					</p>
+				</div>
 				<div id="datos">
+					<p>Nombre de usuario: <i th:text="${user.username}"></i></p>
 					<p>Nombre: <i th:text="${user.name}"></i></p>
 					<p>Apellidos: <i th:text="${user.firstName}"></i>
 							   	  <i th:text="${user.secondName}"></i></p>
 					<p>Correo electrónico: <i th:text="${user.email}"></i></p>
 				</div>
+				<nav id="menu">
+					<div>
+						<div id="avatar"></div>
+						<ul>
+							<li>Datos personales</li>
+							<li>Mis resultados</li>
+							<li>Cambiar contraseña</li>
+						</ul>
+					</div>
+				</nav>
+				
 			</div>
 		</div>
-		
-		<a th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
+		<a id="deleteButton" th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
 	<footer th:replace="footer::footer"></footer>
 </body>
 </html>

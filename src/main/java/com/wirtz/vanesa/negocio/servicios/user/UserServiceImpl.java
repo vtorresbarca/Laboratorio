@@ -3,6 +3,8 @@ package com.wirtz.vanesa.negocio.servicios.user;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.session.SessionInformation;
@@ -49,10 +51,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(UserForm usuarioForm) throws DifferentPasswords, UsernameAlreadyExists {
-
+	public void createUser(UserForm usuarioForm) throws DifferentPasswords, UsernameAlreadyExists, WrongPassword {
+		//Minimum 8 characters 1 letra mayuscula, 1 letra minuscula, 1 numero y 1 caracter especial
+		Pattern pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
+		Matcher message = pattern.matcher(usuarioForm.getPassword());
+		
 		if (usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
-
+			 
+			if(!message.matches()) {
+				throw new WrongPassword();
+			}
+			
 			if (!usernameExists(usuarioForm)) {
 				MyUser userEntity = Utils.convertFormToEntity(usuarioForm);
 				rolService.saveRol(userEntity, "user");
@@ -84,7 +93,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(UserForm userForm) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty{
+	public MyUser updateUser(UserForm userForm) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty
+												, WrongPassword{
+		//Minimum 8 characters 1 letra mayuscula, 1 letra minuscula, 1 numero y 1 caracter especial
+		Pattern pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
+		Matcher message = pattern.matcher(userForm.getPassword());
+		 
+		if(!message.matches()) {
+			throw new WrongPassword();
+		}
 		if(userForm.getUsername().isEmpty()) {
 			throw new EditUsernameEmpty();
 		}else if(userForm.getPassword().isEmpty()) {
@@ -92,6 +109,8 @@ public class UserServiceImpl implements UserService {
 		}
 			MyUser myUser = userRepo.findByUsername(userForm.getUsername()).get();
 			userRepo.save(Utils.setProperties(myUser, userForm));
+			
+			return myUser;
 	}
 
 	@Override
@@ -99,8 +118,6 @@ public class UserServiceImpl implements UserService {
 		Optional<MyUser> foundUser = (userRepo.findById(id));
 		return Utils.convertEntityToBean(foundUser.get());
 	}
-
-	
 
 	@Override
 	public List<UserBean> listUsers() {

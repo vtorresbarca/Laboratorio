@@ -4,7 +4,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
-import com.wirtz.vanesa.vista.dto.user.UserEditForm;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
 public class Utils {
@@ -30,17 +29,7 @@ public class Utils {
 				userEntity.getSecondName(), userEntity.getEmail(), userEntity.getPassword());
 	}
 	
-	public static MyUser convertEditFormToEntity(UserEditForm user) {
-		MyUser miUsuario = new MyUser();
-		miUsuario.setUsername(user.getUsername());
-		miUsuario.setPassword(encoder.encode(user.getPassword()));
-		miUsuario.setName(user.getName());
-		miUsuario.setFirstName(user.getFirstName());
-		miUsuario.setSecondName(user.getSecondName());
-		miUsuario.setEmail(user.getEmail());
-		return miUsuario;
-	}
-	
+
 	public static MyUser setProperties(MyUser myUser, UserForm userForm) {
 		if((userForm.getUsername()!= null)||!userForm.getUsername().isEmpty()) {
 			myUser.setUsername(userForm.getUsername());

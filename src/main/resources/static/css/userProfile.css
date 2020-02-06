@@ -5,18 +5,70 @@ body {
 }
  
 .contenedor {
-	width: 100%;
-	height: 90%;
-	color: black;
-}
-
- #profile-box {
 	position: absolute;
-	float:left;
-	width: 50%;
-	height: 100%;
-	background-color: grey;
-	opacity: 0.5;
+	left: 26%;
+	top: 17%;
+	translate: transform(-50%,-50%);
+	width: 50vw;
+	height: 50%;
 	color: black;
 }
 
+ #profile-box:not(#deleteButton) {
+	position: relative;
+	float:left;
+	width: 100%;
+	height: 100%;
+	background-color: #ffd5aa;
+	color: black;
+	min-width: 690px;
+	min-height: 380px;
+}
+
+.fa-user-edit {
+	font-size: 35px;
+}
+
+#profile-title {
+	text-align: center;
+	font-size: 35px;
+	background-color: white;
+	opacity:0.5;
+}
+
+#deleteButton {
+	position:absolute;
+	left: 75%;
+    top: 81%;
+    translate: transform(-50%,-50%);
+	margin: 20px;
+}
+
+#menu{
+	position:absolute;
+	display: flex;
+	flex-direction: column;
+	float:right;
+	margin-right: 10px;
+	top: 180px;
+    bottom: 0;
+    left: 540px;
+	width: 30%;
+	height: 100%;
+}
+
+#avatar{
+	position:absolute;
+	float:right;
+	width: 100%;
+	height: 40%;
+}
+
+#menu ul {
+	width: 100%;
+	height: 60%;
+}
+
+#menu li {
+	list-style: none;	
+}

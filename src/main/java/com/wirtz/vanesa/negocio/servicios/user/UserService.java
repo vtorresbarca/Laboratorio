@@ -8,6 +8,7 @@ import com.wirtz.vanesa.excepciones.DifferentPasswords;
 import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
 import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
 import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
+import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
@@ -15,9 +16,9 @@ import com.wirtz.vanesa.vista.dto.user.UserForm;
 public interface UserService {
 
 	void expireUserSessions(String username);
-	void createUser(UserForm usuario) throws DifferentPasswords, UsernameAlreadyExists;
+	void createUser(UserForm usuario) throws DifferentPasswords, UsernameAlreadyExists, WrongPassword;
 	void deleteByUsername(String username);
-	void updateUser(UserForm editUser) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty;
+	MyUser updateUser(UserForm editUser) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty, WrongPassword;
 	UserBean findUserById(Long id);
 	UserBean findUserByUsername(String username);
 	List<UserBean> listUsers(); 
