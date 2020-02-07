@@ -48,7 +48,7 @@
 				
 			</div>
 		</div>
-		<a id="deleteButton" th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
+		<a id="deleteButton" aria-label="Borrar mi cuenta" th:href="@{/deleteUser(username=${user.username})}" class="btn btn-danger">Darme de baja</a>
 	<footer th:replace="footer::footer"></footer>
 </body>
 </html>
