@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wirtz.vanesa.excepciones.DifferentPasswords;
-import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
-import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
-import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
+import com.wirtz.vanesa.excepciones.DifferentPasswordsException;
+import com.wirtz.vanesa.excepciones.UsernameAlreadyExistsException;
 import com.wirtz.vanesa.negocio.servicios.user.UserService;
-import com.wirtz.vanesa.negocio.servicios.user.WrongPassword;
+import com.wirtz.vanesa.negocio.servicios.user.WrongPasswordException;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
@@ -48,15 +46,15 @@ public class UserController {
 			try {
 				userService.createUser(newUser);
 				
-			} catch (DifferentPasswords e) {
+			} catch (DifferentPasswordsException e) {
 				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
 				return "crearUsuario";
 				
-			} catch (UsernameAlreadyExists u) {
+			} catch (UsernameAlreadyExistsException u) {
 				result.rejectValue("username", "error.username", "Ese nombre de usuario ya existe, introduzca otro");
 				return "crearUsuario";
 				
-			} catch (WrongPassword w) {
+			} catch (WrongPasswordException w) {
 				result.rejectValue("password", "error.password", "La contraseña tiene que tener mínimo 8 caracteres"
 						+ "una letra mayúscula, una minúscula, un número y un carácter especial");
 				return "crearUsuario";
@@ -104,7 +102,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/editUser")
-	public String editUser(@Valid@ModelAttribute("user") UserForm editUser, BindingResult result, Model model,
+	public String editUser(@ModelAttribute("user") UserForm editUser, BindingResult result, Model model,
 			HttpSession session) {
 		if(result.hasErrors()) {
 			return "editUserProfile";
@@ -112,18 +110,10 @@ public class UserController {
 			try {
 				userService.updateUser(editUser);
 				
-			}catch (DifferentPasswords ex) {
-				result.rejectValue("password", "error.password", "Las contraseñas tienen que ser iguales");
+			}catch(DifferentPasswordsException d) {
+				result.rejectValue("password", "error.password", "Las contraseñas deben ser iguales");
 				return "editUserProfile";
-				
-			}catch (EditUsernameEmpty e) {
-				result.rejectValue("username", "error.username", "El nombre de usuario no puede estar vacío");
-				return "editUserProfile";
-				
-			}catch (EditPasswordEmpty p) {
-				result.rejectValue("password", "error.password", "El campo 'contraseña' no puede estar vacío");
-				return "editUserProfile";
-			}catch (WrongPassword w) {
+			}catch (WrongPasswordException w) {
 				result.rejectValue("password", "error.password", "La contraseña tiene que tener mínimo 8 caracteres,"
 						+ " una letra mayúscula, una minúscula, un número y un carácter especial");
 				return "editUserProfile";

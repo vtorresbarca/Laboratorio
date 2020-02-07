@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.wirtz.vanesa.excepciones.DifferentPasswords;
-import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
-import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
-import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
-import com.wirtz.vanesa.persistencia.entidades.MyUser;
+import com.wirtz.vanesa.excepciones.DifferentPasswordsException;
+import com.wirtz.vanesa.excepciones.UsernameAlreadyExistsException;
 import com.wirtz.vanesa.vista.dto.user.UserBean;
 import com.wirtz.vanesa.vista.dto.user.UserForm;
 
@@ -16,9 +13,9 @@ import com.wirtz.vanesa.vista.dto.user.UserForm;
 public interface UserService {
 
 	void expireUserSessions(String username);
-	void createUser(UserForm usuario) throws DifferentPasswords, UsernameAlreadyExists, WrongPassword;
+	void createUser(UserForm usuario) throws DifferentPasswordsException, UsernameAlreadyExistsException, WrongPasswordException;
 	void deleteByUsername(String username);
-	MyUser updateUser(UserForm editUser) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty, WrongPassword;
+	void updateUser(UserForm editUser) throws DifferentPasswordsException,  WrongPasswordException;
 	UserBean findUserById(Long id);
 	UserBean findUserByUsername(String username);
 	List<UserBean> listUsers(); 

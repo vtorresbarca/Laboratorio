@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-body {
-	background-image: none;
-}
- 
 .contenedor {
 	position: absolute;
 	left: 26%;

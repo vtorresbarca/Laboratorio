@@ -31,22 +31,22 @@ public class Utils {
 	
 
 	public static MyUser setProperties(MyUser myUser, UserForm userForm) {
-		if((userForm.getUsername()!= null)||!userForm.getUsername().isEmpty()) {
+		if((userForm.getUsername()!= null) && !userForm.getUsername().isEmpty()) {
 			myUser.setUsername(userForm.getUsername());
 		}
-		if((userForm.getPassword()!= null)||!userForm.getPassword().isEmpty()) {
+		if((userForm.getPassword()!= null) && !userForm.getPassword().isEmpty()) {
 			myUser.setPassword(encoder.encode(userForm.getPassword()));
 		}
-		if((userForm.getName()!= null)||!userForm.getName().isEmpty()) {
+		if((userForm.getName()!= null) && !userForm.getName().isEmpty()) {
 			myUser.setName(userForm.getName());
 		}
-		if((userForm.getFirstName()!= null)||!userForm.getFirstName().isEmpty()) {
+		if((userForm.getFirstName()!= null) && !userForm.getFirstName().isEmpty()) {
 			myUser.setFirstName(userForm.getFirstName());
 		}
-		if((userForm.getSecondName()!= null)||!userForm.getSecondName().isEmpty()) {
+		if((userForm.getSecondName()!= null) && !userForm.getSecondName().isEmpty()) {
 			myUser.setSecondName(userForm.getSecondName());
 		}
-		if((userForm.getEmail()!= null)||!userForm.getEmail().isEmpty()) {
+		if((userForm.getEmail()!= null) && !userForm.getEmail().isEmpty()) {
 			myUser.setEmail(userForm.getEmail());
 		}
 		

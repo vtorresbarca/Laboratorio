@@ -10,7 +10,6 @@ public class UserForm {
 	
 	@NotNull(message="El nombre de usuario es obligatorio")
 	@NotBlank(message="El nombre de usuario no puede estar en blanco")
-	
 	private String username;
 	
 	private String password;

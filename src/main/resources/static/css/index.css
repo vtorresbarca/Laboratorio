@@ -5,16 +5,13 @@ html {
 	height: 100%;
 }
 
-body {
-    background-image: url("../img/microscopio.jpg");
+#pagina {
+	min-height: 100%;
+	position: absolute;
+	background-image: url("../img/microscopio.jpg");
     background-size: cover;
     width: 100vw;
     height: 100%;
-}
-
-#pagina {
-	min-height: 100%;
-	position: relative;
 }
 
 main {
@@ -61,7 +58,7 @@ main {
     letter-spacing: .5em;
 }
 
-.boton{
+.boton {
     position: relative;
     width: 20%;
     height: 100%;
@@ -79,9 +76,9 @@ main {
     transition: all 0.5s ease-in-out;
 }
 
-footer div {
+footer {
 	background-color: #343A40;
-	height: 40px;
+	height: 100px;
 	width: 100%;
 	position: fixed;
 	bottom: 0;
@@ -89,9 +86,34 @@ footer div {
     text-align: center;
 }
 
-.fa-instagram, .fa-linkedin, .fa-twitter-square {
-    color: white;
+.fa-linkedin, .fa-twitter-square, .fa-envelope {
+	color: white;
     font-size: 25px;
-    letter-spacing: .40em;
-    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#politicas a, #contactos a {
+	text-decoration: none;
+	color: white;
+	font-size: 15px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+#politicas {
+	list-style:none;
+	position: absolute;
+	top: 8px;
+	bottom: 0;
+	left: 65vh;
+}
+
+#contactos {
+	position: absolute;
+	top: 25px;
+	bottom: 0;
+	right: 70vh;
+}
+
+#politicas a:hover, #contactos a:hover{
+	color: grey;
 }

@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
 <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/css/userProfile.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 </head>
 <body>
@@ -57,7 +57,7 @@
 				</div>
 
 				<div class="caja-texto">
-					<input type="password" placeholder="Contrasena"
+					<input type="password" placeholder="Contraseña"
 						th:field="*{password}" th:value="${password}"/>
 					<div th:if="${#fields.hasErrors('password')}"
 						class="alert alert-danger">
@@ -65,10 +65,18 @@
 					</div>
 				</div>
 
+				<div class="caja-texto">
+					<input type="password" placeholder="Confirme contraseña"
+						th:field="*{password2}" th:value="${password2}"/>
+					<div th:if="${#fields.hasErrors('password2')}"
+						class="alert alert-danger">
+						<span th:errors="*{password}"></span>
+					</div>
+				</div>
 			</div>
 
 			<button type="submit" class="boton" name="editUser">
-				<i class="fas fa-sign-in-alt"></i> Crear
+				<i class="fas fa-sign-in-alt"></i>Guardar cambios 
 			</button>
 		</div>
 	</form>

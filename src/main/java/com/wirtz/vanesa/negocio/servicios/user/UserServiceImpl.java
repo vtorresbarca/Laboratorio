@@ -13,10 +13,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.wirtz.vanesa.excepciones.DifferentPasswords;
-import com.wirtz.vanesa.excepciones.EditPasswordEmpty;
-import com.wirtz.vanesa.excepciones.EditUsernameEmpty;
-import com.wirtz.vanesa.excepciones.UsernameAlreadyExists;
+import com.wirtz.vanesa.excepciones.DifferentPasswordsException;
+import com.wirtz.vanesa.excepciones.UsernameAlreadyExistsException;
 import com.wirtz.vanesa.negocio.servicios.rol.RolServiceImpl;
 import com.wirtz.vanesa.persistencia.entidades.MyUser;
 import com.wirtz.vanesa.persistencia.entidades.Rol;
@@ -51,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void createUser(UserForm usuarioForm) throws DifferentPasswords, UsernameAlreadyExists, WrongPassword {
+	public void createUser(UserForm usuarioForm) throws DifferentPasswordsException, UsernameAlreadyExistsException, WrongPasswordException {
 		//Minimum 8 characters 1 letra mayuscula, 1 letra minuscula, 1 numero y 1 caracter especial
 		Pattern pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
 		Matcher message = pattern.matcher(usuarioForm.getPassword());
@@ -59,7 +57,7 @@ public class UserServiceImpl implements UserService {
 		if (usuarioForm.getPassword().contentEquals(usuarioForm.getPassword2())) {
 			 
 			if(!message.matches()) {
-				throw new WrongPassword();
+				throw new WrongPasswordException();
 			}
 			
 			if (!usernameExists(usuarioForm)) {
@@ -67,11 +65,11 @@ public class UserServiceImpl implements UserService {
 				rolService.saveRol(userEntity, "user");
 				userRepo.save(userEntity);
 			} else {
-				throw new UsernameAlreadyExists("Ese nombre de usuario ya existe, introduzca otro");
+				throw new UsernameAlreadyExistsException("Ese nombre de usuario ya existe, introduzca otro");
 			}
 
 		} else {
-			throw new DifferentPasswords("Las contraseñas no coinciden, vuelva a intentarlo");
+			throw new DifferentPasswordsException("Las contraseñas no coinciden, vuelva a intentarlo");
 		}
 	}
 
@@ -93,24 +91,23 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public MyUser updateUser(UserForm userForm) throws DifferentPasswords, EditUsernameEmpty, EditPasswordEmpty
-												, WrongPassword{
+	public void updateUser(UserForm userForm) throws DifferentPasswordsException
+												, WrongPasswordException{
 		//Minimum 8 characters 1 letra mayuscula, 1 letra minuscula, 1 numero y 1 caracter especial
 		Pattern pattern = Pattern.compile("^(?=\\w*\\d)(?=\\w*[A-Z])(?=\\w*[a-z])\\S{8,16}$");
 		Matcher message = pattern.matcher(userForm.getPassword());
-		 
-		if(!message.matches()) {
-			throw new WrongPassword();
-		}
-		if(userForm.getUsername().isEmpty()) {
-			throw new EditUsernameEmpty();
-		}else if(userForm.getPassword().isEmpty()) {
-			throw new EditPasswordEmpty();
-		}
-			MyUser myUser = userRepo.findByUsername(userForm.getUsername()).get();
-			userRepo.save(Utils.setProperties(myUser, userForm));
+		
+		if(userForm.getPassword().equals(userForm.getPassword2())) {
+			if(message.matches() || userForm.getPassword().isEmpty()) {
+				MyUser myUser = userRepo.findByUsername(userForm.getUsername()).get();
+				userRepo.save(Utils.setProperties(myUser, userForm));
+			}else {
+				throw new WrongPasswordException();
+			}
 			
-			return myUser;
+		} else {
+			throw new DifferentPasswordsException();
+		}
 	}
 
 	@Override
