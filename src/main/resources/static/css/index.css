@@ -78,7 +78,7 @@ main {
 
 footer {
 	background-color: #343A40;
-	height: 100px;
+	height: 80px;
 	width: 100%;
 	position: fixed;
 	bottom: 0;
@@ -102,7 +102,7 @@ footer {
 #politicas {
 	list-style:none;
 	position: absolute;
-	top: 8px;
+	top: 3px;
 	bottom: 0;
 	left: 65vh;
 }
