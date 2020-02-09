@@ -117,3 +117,9 @@ footer {
 #politicas a:hover, #contactos a:hover{
 	color: grey;
 }
+
+#nivel {
+	float: right;
+	margin-top: 25px;
+	margin-right: 10px;
+}
