@@ -16,4 +16,8 @@ public class AppController {
 		return "login";
 	}
 
+	@GetMapping("/calendar")
+	public String calendar() {
+		return "calendar";
+	}
 }
