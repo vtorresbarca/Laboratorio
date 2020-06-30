@@ -47,7 +47,6 @@ public class MyUser {
 	inverseJoinColumns=@JoinColumn(name="id_rol"))
 	private Set<Rol> roles = new HashSet<Rol>();
 
-	
 	public MyUser() {
 		super();
 	}
