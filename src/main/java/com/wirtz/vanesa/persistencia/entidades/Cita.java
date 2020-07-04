@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cita {
@@ -23,6 +26,10 @@ public class Cita {
 	private Date end_date;
 	
 	private String text;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private MyUser user;
 	
 	public Cita() {
 		
@@ -67,5 +74,14 @@ public class Cita {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	public MyUser getUser() {
+		return user;
+	}
+
+	public void setUser(MyUser user) {
+		this.user = user;
+	}
+	
 	
 }

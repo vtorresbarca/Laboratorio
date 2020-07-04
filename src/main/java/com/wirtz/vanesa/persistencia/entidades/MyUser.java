@@ -1,6 +1,8 @@
 package com.wirtz.vanesa.persistencia.entidades;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /*Clase que representa la tabla de nuestros usuarios en la BD 
  * con sus roles correspondientes*/
@@ -47,6 +50,9 @@ public class MyUser {
 	inverseJoinColumns=@JoinColumn(name="id_rol"))
 	private Set<Rol> roles = new HashSet<Rol>();
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Cita> citas = new ArrayList<Cita>();
+	
 	public MyUser() {
 		super();
 	}
@@ -145,6 +151,14 @@ public class MyUser {
 
 	public void setIsCompany(boolean isCompany) {
 		this.isCompany = isCompany;
+	}
+
+	public List<Cita> getCitas() {
+		return citas;
+	}
+
+	public void setCitas(List<Cita> citas) {
+		this.citas = citas;
 	}
 	
 }

@@ -24,6 +24,19 @@ public class Utils {
 		return miUsuario;
 	}
 
+	public static MyUser convertBeanToEntity(UserBean userB) {
+		MyUser miUsuario = new MyUser();
+		miUsuario.setId(userB.getId());
+		miUsuario.setUsername(userB.getUsername());
+		miUsuario.setPassword(encoder.encode(userB.getPassword()));
+		miUsuario.setName(userB.getName());
+		miUsuario.setFirstName(userB.getFirstName());
+		miUsuario.setSecondName(userB.getSecondName());
+		miUsuario.setEmail(userB.getEmail());
+		
+		return miUsuario;
+	}
+	
 	public static UserBean convertEntityToBean(MyUser userEntity) {
 		return new UserBean(userEntity.getId(), userEntity.getUsername(), userEntity.getName(), userEntity.getFirstName(),
 				userEntity.getSecondName(), userEntity.getEmail(), userEntity.getPassword());

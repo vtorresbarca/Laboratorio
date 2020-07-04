@@ -12,4 +12,5 @@ public interface CenterService {
 
 	List<Center> findByCompany(Company company);
 	void saveCenter(Center center);
+	List<Center> initCenters();
 }

@@ -1,70 +1,65 @@
 package com.wirtz.vanesa.vista.controllers;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wirtz.vanesa.negocio.servicios.center.CenterService;
-import com.wirtz.vanesa.negocio.servicios.company.CompanyService;
-import com.wirtz.vanesa.persistencia.entidades.Center;
-import com.wirtz.vanesa.persistencia.entidades.Company;
+import com.wirtz.vanesa.negocio.servicios.cita.CitaService;
+import com.wirtz.vanesa.negocio.servicios.user.UserService;
+import com.wirtz.vanesa.persistencia.entidades.Cita;
+import com.wirtz.vanesa.vista.dto.cita.CitaDto;
+import com.wirtz.vanesa.vista.dto.user.UserBean;
+import com.wirtz.vanesa.vista.dto.user.UserForm;
 
 @Controller
 public class ClientController {
 
-	//https://ejemplos.net/ejemplos-de-cif-empresa/
+	@Autowired
+	CitaService citaService;
 	
 	@Autowired
-	CenterService centerService;
+	UserService userService;
 	
-	@Autowired
-	CompanyService companyService;
+	@GetMapping("/citas")
+	public String showAppointments(Principal principal, Model model) {
+		String username = principal.getName();
+		UserBean user = userService.findUserByUsername(username);
+		List<Cita> citas = citaService.getCitasByUser(user);
+		model.addAttribute("user", user);
+		model.addAttribute("citas", citas);
+		return "calendar";
+	}
 	
-	@GetMapping("/centerList")
-	public ModelAndView centerList() {
-		ModelAndView mav = new ModelAndView("centers");
-
-		//codigo de prueba
-		List<Center> centers = new ArrayList<Center>();
-		Company company = new Company();
-		company.setNif("S0794867B");
-
-		Center c1 = new Center();
-		c1.setName("Centro de Valencia");
-		c1.setProvince("Valencia");
-		c1.setDirection("Rua do Marco, nº 17, Valencia");
-		Center c2 = new Center();
-		c2.setName("Centro de Madrid");
-		c2.setProvince("Madrid");
-		Center c3 = new Center();
-		c3.setName("Centro de Barcelona");
-		c3.setProvince("Barcelona");
-		Center c4 = new Center();
-		c4.setName("Centro de Málaga");
-		c4.setProvince("Malaga");
-		c1.setCompany(company);
-		c2.setCompany(company);
-		c3.setCompany(company);
-
-		centers.add(c1);
-		centers.add(c2);
-		centers.add(c3);
-
-		company.setCenters(centers);
+	@ResponseBody
+	@RequestMapping(value = "/citas/{id}", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<List<CitaDto>> citas(
+			@PathVariable(value = "id") Long idUser) {
 		
-		companyService.saveCompany(company);
+		List<Cita> citas = citaService.getCitasByUser(userService.findUserById(idUser));
+		List<CitaDto> citasDto = new ArrayList<>();
 		
-		for (Center c : centers) {
-			centerService.saveCenter(c);
+		for (Cita cita : citas) {
+			CitaDto citaDto = new CitaDto();
+			citaDto.setId(cita.getId());
+			citaDto.setStart_date(cita.getStart_date());
+			citaDto.setEnd_date(cita.getEnd_date());
+			citaDto.setText(cita.getText());
+			
+			citasDto.add(citaDto);
 		}
-		/*-------------------------*/
-		
-		mav.addObject("centers", centers);
-
-		return mav;
+		return new ResponseEntity<List<CitaDto>>(citasDto, HttpStatus.OK);
 	}
 }
