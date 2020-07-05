@@ -43,13 +43,15 @@
 	        $( document ).ready(function() {
 				/*Recupero la informacion de base de datos*/
 				var idUser = [[${user.id}]];
-				var listaCitas = [[${citas}]];
+				var events = [];
 	            $.ajax({
 	                url: 'http://localhost:8080/citas/' + idUser,
 	                type: 'GET',
+	                dataType: 'JSON',
 	                success: function(respuesta) {
-	                    console.log(respuesta);
-	                    console.log()
+	                    scheduler.init('calendar',new Date(2020,0,1),"month");
+	                    respuesta.forEach(cita => events.push(cita));
+	                    scheduler.parse(events, "json");
 	                },
 	                error: function() {
 	                    console.error("No es posible completar la operación");
