@@ -17,4 +17,9 @@ public class CompanyServiceImpl implements CompanyService{
 		companyRepo.save(company);
 	}
 
+	@Override
+	public Company getCompany() {
+		return companyRepo.getOne("S0794867B");
+	}
+
 }

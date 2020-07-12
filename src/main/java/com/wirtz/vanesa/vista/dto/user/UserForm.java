@@ -3,6 +3,7 @@ package com.wirtz.vanesa.vista.dto.user;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class UserForm {
 
@@ -10,16 +11,23 @@ public class UserForm {
 	
 	@NotNull(message="El nombre de usuario es obligatorio")
 	@NotBlank(message="El nombre de usuario no puede estar en blanco")
+	@Size(min = 3, max = 20)
 	private String username;
-	
+
 	private String password;
 	
 	private String password2;
 
+	@Size(min = 5, max = 20)
+	@NotBlank(message="El nombre no puede estar en blanco")
 	private String name;
 	
+	@Size(min = 5, max = 20)
+	@NotBlank(message="El apellido no puede estar en blanco")
 	private String firstName;
 	
+	@Size(min = 5, max = 20)
+	@NotBlank(message="El apellido no puede estar en blanco")
 	private String secondName;
 
 	@Email

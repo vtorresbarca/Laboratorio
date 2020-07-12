@@ -27,12 +27,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" th:href="@{/centerList}"
 								aria-label="Contacta con nosotros">Nuestros centros</a> 
-									<a class="dropdown-item" th:href="@{#}" aria-label="Formulario de contacto">Formulario de contacto</a>
-									<a class="dropdown-item" sec:authorize="hasAuthority('admin')" th:href="@{/}">Añadir un centro</a>	
+								<a class="dropdown-item" th:href="@{#}" aria-label="Formulario de contacto">Formulario de contacto</a>
+								<a class="dropdown-item" sec:authorize="hasAuthority('admin')" th:href="@{/}">Añadir un centro</a>	
 							</div>
 						</li>
 						<li class="nav-item" sec:authorize="hasAuthority('admin')">
 							<a class="nav-link" th:href="@{/listUsers}" aria-label="Ver los clientes">Ver clientes</a>
+						</li>
+						<li class="nav-item" sec:authorize="hasAuthority('user')">
+							<a class="nav-link" th:href="@{/citas}" aria-label="Ver mis citas">Ver mis citas</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav ml-auto">

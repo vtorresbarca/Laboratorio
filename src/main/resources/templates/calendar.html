@@ -15,15 +15,13 @@
             html, body{
                 margin:0px;
                 padding:0px;
-                height:100%;
+                height:90%;
                 overflow:hidden;
             }
-
 
         </style>
     </head>
     <body>
-    	<form action=""></form>
         <div id="calendar" class="dhx_cal_container" 
             style='width:100%; height:100%;'>
             <div class="dhx_cal_navline">
@@ -40,11 +38,11 @@
         </div>
         
         <script>
-	        $( document ).ready(function() {
-				/*Recupero la informacion de base de datos*/
+	        $( document ).ready(function() {	
 				var idUser = [[${user.id}]];
 				var events = [];
 	            $.ajax({
+	            	/*Recupero la informacion de base de datos*/
 	                url: 'http://localhost:8080/citas/' + idUser,
 	                type: 'GET',
 	                dataType: 'JSON',
